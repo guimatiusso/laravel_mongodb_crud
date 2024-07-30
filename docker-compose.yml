@@ -1,7 +1,7 @@
 services:
     laravel.test:
         build:
-            context: ./vendor/laravel/sail/runtimes/8.3
+            context: ./docker/8.3
             dockerfile: Dockerfile
             args:
                 WWWGROUP: '${WWWGROUP}'
@@ -36,7 +36,7 @@ services:
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
             - 'sail-mysql:/var/lib/mysql'
-            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+            - './docker/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
         networks:
             - sail
         healthcheck:
@@ -47,9 +47,22 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    mongo:
+        image: 'mongo:6.0'
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: '${MDB_USERNAME}'
+            MONGO_INITDB_ROOT_PASSWORD: '${MDB_PASSWORD}'
+            MONGO_INITDB_DATABASE: '${MDB_DATABASE}'
+        volumes:
+            - 'sailmongo:/data/mdb'
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
 volumes:
+    sailmongo:
+        driver: local
     sail-mysql:
         driver: local
