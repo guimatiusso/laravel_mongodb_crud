@@ -9,7 +9,7 @@ class ExpenseController extends Controller
 {
     public function index()
     {
-        $expenses = Expense::paginate(2);
+        $expenses = Expense::paginate(10);
         return view('expenses.index', compact('expenses'));
     }
 

@@ -15,7 +15,7 @@
     </div>
 
     <div class="overflow-x-auto bg-white rounded-lg shadow">
-        <table class="min-w-full bg-white">
+        <table class="w-full bg-white text-center">
             <thead>
             <tr>
                 <th class="w-1/6 px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
@@ -32,16 +32,16 @@
                     <td class="px-4 py-2 text-sm text-gray-700">{{ $expense->name }}</td>
                     <td class="px-4 py-2 text-sm text-gray-700">{{ $expense->amount }}</td>
                     <td class="px-4 py-2 text-sm text-gray-700">{{ $expense->category }}</td>
-                    <td class="px-4 py-2 text-sm text-gray-700">{{ $expense->date }}</td>
+                    <td class="px-4 py-2 text-sm text-gray-700">{{ $expense->formatted_date }}</td>
                     <td class="px-4 py-2 text-sm text-gray-700">{{ $expense->description }}</td>
                     <td class="px-4 py-2 text-sm">
                         <div class="flex space-x-2">
-                            <a href="{{ route('expenses.show', $expense->id) }}" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">View</a>
-                            <a href="{{ route('expenses.edit', $expense->id) }}" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">Edit</a>
+                            <a href="{{ route('expenses.show', $expense->id) }}" class="bg-success text-gray-700 px-3 py-1 rounded hover:bg-green-600">View</a>
+                            <a href="{{ route('expenses.edit', $expense->id) }}" class="bg-yellow-500 text-gray-700 px-3 py-1 rounded hover:bg-yellow-600">Edit</a>
                             <form action="{{ route('expenses.destroy', $expense->id) }}" method="POST" class="inline-block">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</button>
+                                <button type="submit" class="bg-red-500 text-gray-700 px-3 py-1 rounded hover:bg-red-600">Delete</button>
                             </form>
                         </div>
                     </td>
